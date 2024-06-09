@@ -618,6 +618,24 @@
 			<File
 				RelativePath=".\amx\amx.h">
 			</File>
+			<File
+				RelativePath=".\amx\amxcore.c">
+			</File>
+			<File
+				RelativePath=".\amx\amxDGram.c">
+			</File>
+			<File
+				RelativePath=".\amx\amxfile.c">
+			</File>
+			<File
+				RelativePath=".\amx\amxstring.c">
+			</File>
+			<File
+				RelativePath=".\amx\amxtime.c">
+			</File>
+			<File
+				RelativePath=".\amx\float.c">
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\console.cpp">
