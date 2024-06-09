@@ -33,31 +33,31 @@ char Util_toupper(char c) {return ((c>(char)0x60) && (c<(char)0x7b))? c-0x20:c;}
 
 char *Util_stristr(const char *String, const char *Pattern)
 {
-      char *pptr, *sptr, *start;
+	char *pptr, *sptr, *start;
 
-      for (start = (char *)String; *start != 0; start++)
-      {
-            /* find start of pattern in string */
-            for ( ; ((*start!=0) && (Util_toupper(*start) != Util_toupper(*Pattern))); start++)
-                  ;
-            if (0 == *start)
-                  return NULL;
+	for (start = (char *)String; *start != 0; start++)
+	{
+		/* find start of pattern in string */
+		for ( ; ((*start!=0) && (Util_toupper(*start) != Util_toupper(*Pattern))); start++)
+			;
+		if (0 == *start)
+			return NULL;
 
-            pptr = (char *)Pattern;
-            sptr = (char *)start;
+		pptr = (char *)Pattern;
+		sptr = (char *)start;
 
-            while (Util_toupper(*sptr) == Util_toupper(*pptr))
-            {
-                  sptr++;
-                  pptr++;
+		while (Util_toupper(*sptr) == Util_toupper(*pptr))
+		{
+			sptr++;
+			pptr++;
 
-                  /* if end of pattern then pattern was found */
+			/* if end of pattern then pattern was found */
 
-                  if (0 == *pptr)
-                        return (start);
-            }
-      }
-      return NULL;
+			if (0 == *pptr)
+				return (start);
+		}
+	}
+	return NULL;
 }
 
 //----------------------------------------------------
@@ -123,36 +123,35 @@ int Util_wildcmp(char *wild, char *string)
 
 int Util_strnicmp(const char *s1, const char *s2, size_t n)
 {
+	if (n == 0) return 0;
 
-  if (n == 0) return 0;
+	do
+	{
+		if (Util_toupper((unsigned char)*s1) != Util_toupper((unsigned char)*s2++))
+			return (int)Util_toupper((unsigned char)*s1) - (int)Util_toupper((unsigned char)*--s2);
+		if (*s1++ == 0)
+			break;
 
-  do
-  {
-    if (Util_toupper((unsigned char)*s1) != Util_toupper((unsigned char)*s2++))
-      return (int)Util_toupper((unsigned char)*s1) - (int)Util_toupper((unsigned char)*--s2);
-    if (*s1++ == 0)
-      break;
+	} while (--n != 0);
 
-  } while (--n != 0);
-
-  return 0;
+	return 0;
 }
 
 //----------------------------------------------------
 
 char *Util_strrev(char *str)
 {
-      char *p1, *p2;
+	char *p1, *p2;
 
-      if (! str || ! *str)
-            return str;
-      for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2)
-      {
-            *p1 ^= *p2;
-            *p2 ^= *p1;
-            *p1 ^= *p2;
-      }
-      return str;
+	if (! str || ! *str)
+		return str;
+	for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2)
+	{
+		*p1 ^= *p2;
+		*p2 ^= *p1;
+		*p1 ^= *p2;
+	}
+	return str;
 }
 
 //----------------------------------------------------
@@ -200,79 +199,42 @@ char * Base64Encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012
 
 void Util_Base64Encode( char *cpInput, char *cpOutput )
 {
-int nIdx[ 4 ];
-while ( '\0' != *cpInput )
-{
-  nIdx[0] = ((*cpInput) & 0xFC)>>2;
-  nIdx[1] = ((*cpInput) & 0x03)<<4;
-  cpInput++;
-  if ( '\0' != *cpInput )
-  {
-    nIdx[1] |= ((*cpInput) & 0xF0)>>4;
-    nIdx[2]  = ((*cpInput) & 0x0F)<<2;
-    cpInput++;
-    if ( '\0' != (*cpInput) )
-    {
-      nIdx[2] |= ((*cpInput) & 0xC0) >> 6;
-      nIdx[3]  = (*cpInput) & 0x3F;
-      cpInput++;
-    }
-    else
-      nIdx[3] = 64;
-  }
-  else
-  {
-    nIdx[2] = 64;
-    nIdx[3] = 64;
-  }
+	int nIdx[ 4 ];  
+	while ( '\0' != *cpInput )
+	{
+		nIdx[0] = ((*cpInput) & 0xFC)>>2;
+		nIdx[1] = ((*cpInput) & 0x03)<<4;
+		cpInput++;
+		if ( '\0' != *cpInput )
+		{
+			nIdx[1] |= ((*cpInput) & 0xF0)>>4;
+			nIdx[2]  = ((*cpInput) & 0x0F)<<2;
+			cpInput++;
+			if ( '\0' != (*cpInput) )
+			{
+				nIdx[2] |= ((*cpInput) & 0xC0) >> 6;
+				nIdx[3]  = (*cpInput) & 0x3F;
+				cpInput++;
+			}
+			else
+				nIdx[3] = 64;
+		}
+		else
+		{
+			nIdx[2] = 64;
+			nIdx[3] = 64;
+		}
 
-  *(cpOutput+0) = *(Base64Encoding + nIdx[0]);
-  *(cpOutput+1) = *(Base64Encoding + nIdx[1]);
-  *(cpOutput+2) = *(Base64Encoding + nIdx[2]);
-  *(cpOutput+3) = *(Base64Encoding + nIdx[3]);
-  cpOutput += 4;
-}
-
-*cpOutput = '\0';
-
-return;
-}
-
-//----------------------------------------------------
-
-void K_EncodeString(char *szInput, char *szOutput)
-{
-	char b;
-
-	while(*szInput) {
-		b = *szInput;
-		_asm mov bl, b
-		_asm ror bl, 3
-		_asm mov b, bl
-		*szOutput = b;
-		szInput++;
-		szOutput++;
-	}
-	*szOutput = 0;
-}
-
-//----------------------------------------------------
-
-char * K_DecodeString(char *szInput)
-{
-	char b;
-	char *st = szInput;
-
-	while(*szInput) {
-		b = *szInput;
-		_asm mov bl, b
-		_asm rol bl, 3
-		_asm mov b, bl
-		*szInput = b;
-		szInput++;
+		*(cpOutput+0) = *(Base64Encoding + nIdx[0]);
+		*(cpOutput+1) = *(Base64Encoding + nIdx[1]);
+		*(cpOutput+2) = *(Base64Encoding + nIdx[2]);
+		*(cpOutput+3) = *(Base64Encoding + nIdx[3]);
+		cpOutput += 4;
 	}
 
-	return st;
+	*cpOutput = '\0';
+
+	return;
 }
 
 //----------------------------------------------------

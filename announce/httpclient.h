@@ -57,7 +57,6 @@ typedef struct{
 //----------------------------------------------------
 
 #pragma pack(1)
-
 class CHttpClient
 {
 private:
@@ -70,9 +69,9 @@ private:
 	bool Connect(char *szHost, int iPort);
 	void CloseConnection();
 	bool Send(char *szData);
-	int  Recv(char *szBuffer, int iBufferSize);	
+	int  Recv(char *szBuffer, int iBufferSize);
 
-    void InitRequest(int iType, char *szURL, char *szPostData, char *szReferer);
+	void InitRequest(int iType, char *szURL, char *szPostData, char *szReferer);
 	void HandleEntity();
 
 	void Process();

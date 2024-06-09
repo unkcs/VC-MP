@@ -207,8 +207,8 @@ void CHttpClient::InitRequest(int iType, char *szURL, char *szPostData, char *sz
 
 void CHttpClient::Process()
 {
-	int   header_len;
-	char  request_head[16384];
+	int		header_len;
+	char	request_head[16384];
 
 	if(!Connect(m_Request.host,m_Request.port)) {
 		return;
@@ -277,7 +277,6 @@ void CHttpClient::HandleEntity()
 			if((head_end=strstr(response,"\r\n\r\n"))!=NULL
 				|| (head_end=strstr(response,"\n\n"))!=NULL)
 			{
-
 				header_got=true;
 
 				header_len=(head_end-response);
@@ -311,10 +310,10 @@ void CHttpClient::HandleEntity()
 					memcpy(content_len_str,pcontent_buf,content_len);
 
 					if(content_len_str[content_len-1] == '\r') {
-					   content_len_str[content_len-1]='\0';
+						content_len_str[content_len-1]='\0';
 					}
 					else {
-					   content_len_str[content_len]='\0';
+						content_len_str[content_len]='\0';
 					}
 
 					content_len=atoi(content_len_str);
@@ -380,6 +379,5 @@ void CHttpClient::HandleEntity()
 		}
 	}
 }
-
 
 //----------------------------------------------------
