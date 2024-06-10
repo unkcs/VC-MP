@@ -16,7 +16,9 @@ extern "C" int amx_DGramCleanup(AMX* amx);
 
 int AMXAPI aux_LoadProgram(AMX* amx, char* filename);
 int AMXAPI aux_FreeProgram(AMX *amx);
+char * AMXAPI aux_StrError(int errnum);
 void AMXPrintError(CGameMode* pGameMode, AMX *amx, int error);
+int amx_CustomInit(AMX *amx);
 
 char szGameModeFileName[256];
 
@@ -52,10 +54,36 @@ bool CGameMode::Load(char* pFileName)
 		return false;
 	}
 
+	amx_CoreInit(&m_amx);
+	amx_FloatInit(&m_amx);
+	amx_StringInit(&m_amx);
+	amx_FileInit(&m_amx);
+	amx_TimeInit(&m_amx);
+	amx_DGramInit(&m_amx);
+	amx_CustomInit(&m_amx);
 
-	// TODO: CGameMode::Load
+	m_bInitialised = true;
 
-	return false;
+	// Execute OnGameModeInit callback, if it exists!
+	int tmp;
+	if (!amx_FindPublic(&m_amx, "OnGameModeInit", &tmp))
+		amx_Exec(&m_amx, (cell*)&tmp, tmp);
+	// ----------------------------------------------
+
+	cell ret = 0;
+	err = amx_Exec(&m_amx, &ret, AMX_EXEC_MAIN);
+	if (err == AMX_ERR_SLEEP)
+	{
+		m_bSleeping = true;
+		m_fSleepTime = ((float)ret / 1000.0f);
+	}
+	else if (err != AMX_ERR_NONE)
+	{
+		m_bSleeping = false;
+		AMXPrintError(this, &m_amx, err);
+	}
+
+	return true;
 }
 
 //----------------------------------------------------------------------------------

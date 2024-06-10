@@ -374,7 +374,7 @@ AMX_NATIVE_INFO custom_Natives[] =
 
 int amx_CustomInit(AMX *amx)
 {
-  return amx_Register(amx, custom_Natives, -1);
+	return amx_Register(amx, custom_Natives, -1);
 }
 
 //----------------------------------------------------------------------------------
