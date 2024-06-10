@@ -43,6 +43,20 @@ int AMXAPI aux_LoadProgram(AMX* amx, char* filename)
 	return result;
 }
 
+//----------------------------------------------------------------------------------
+
+int AMXAPI aux_FreeProgram(AMX *amx)
+{
+	if (amx->base != NULL)
+	{
+		amx_Cleanup(amx);
+		free(amx->base);
+		memset(amx, 0, sizeof(AMX));
+	}
+	return AMX_ERR_NONE;
+}
+
+//----------------------------------------------------------------------------------
 
 char * AMXAPI aux_StrError(int errnum)
 {

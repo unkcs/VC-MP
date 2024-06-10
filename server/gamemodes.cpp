@@ -1,7 +1,21 @@
 
 #include "main.h"
 
+extern "C" int amx_CoreInit(AMX* amx);
+extern "C" int amx_CoreCleanup(AMX* amx);
+extern "C" int amx_FloatInit(AMX* amx);
+extern "C" int amx_FloatCleanup(AMX* amx);
+extern "C" int amx_StringInit(AMX* amx);
+extern "C" int amx_StringCleanup(AMX* amx);
+extern "C" int amx_FileInit(AMX* amx);
+extern "C" int amx_FileCleanup(AMX* amx);
+extern "C" int amx_TimeInit(AMX* amx);
+extern "C" int amx_TimeCleanup(AMX* amx);
+extern "C" int amx_DGramInit(AMX* amx);
+extern "C" int amx_DGramCleanup(AMX* amx);
+
 int AMXAPI aux_LoadProgram(AMX* amx, char* filename);
+int AMXAPI aux_FreeProgram(AMX *amx);
 void AMXPrintError(CGameMode* pGameMode, AMX *amx, int error);
 
 char szGameModeFileName[256];
@@ -48,7 +62,24 @@ bool CGameMode::Load(char* pFileName)
 
 void CGameMode::Unload()
 {
-	// TODO: CGameMode::Unload
+	// Execute OnGameModeExit callback, if it exists!
+	int tmp;
+	if (!amx_FindPublic(&m_amx, "OnGameModeExit", &tmp))
+		amx_Exec(&m_amx, (cell*)&tmp, tmp);
+	// ----------------------------------------------
+
+	if (m_bInitialised)
+	{
+		aux_FreeProgram(&m_amx);
+		amx_DGramCleanup(&m_amx);
+		amx_TimeCleanup(&m_amx);
+		amx_FileCleanup(&m_amx);
+		amx_StringCleanup(&m_amx);
+		amx_FloatCleanup(&m_amx);
+		amx_CoreCleanup(&m_amx);
+	}
+	m_bInitialised = false;
+	m_bSleeping = false;
 }
 
 //----------------------------------------------------------------------------------
