@@ -25,7 +25,6 @@ public:
 	StringConvarMap ConsoleVariables;
 
 	CConsole();
-	~CConsole();
 
 	ConsoleVariable_s* FindVariable(char* pVarName);
 
@@ -39,10 +38,16 @@ public:
 	char* GetStringVariable(char* pVarName);
 	void SetStringVariable(char* pVarName, char* pString);
 
+	float GetFloatVariable(char* pVarName);
+	void SetFloatVariable(char* pVarName, float fFloat);
+
 	int GetIntVariable(char* pVarName);
 	void SetIntVariable(char* pVarName, int iInt);
+
+	bool GetBoolVariable(char* pVarName);
+	void SetBoolVariable(char* pVarName, bool bBool);
 
 	void Execute(char* pExecLine);
 };
 
-#endif
+#endif // VCMPSRV_CONSOLE_H

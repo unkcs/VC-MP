@@ -3,40 +3,42 @@
 
 RakServerInterface		*pRak=0;
 
-void ClientJoin(RPCParameters *rpcParams) {} // TODO:
-void ClientJoinPatch(RPCParameters *rpcParams) {} // TODO:
-void Chat(RPCParameters *rpcParams) {} // TODO:
-void ME(RPCParameters *rpcParams) {} // TODO:
-void MsgChat(RPCParameters *rpcParams) {} // TODO:
-void TeamChat(RPCParameters *rpcParams) {} // TODO:
-void RequestClass(RPCParameters *rpcParams) {} // TODO:
-void Spawn(RPCParameters *rpcParams) {} // TODO:
-void Death(RPCParameters *rpcParams) {} // TODO:
-void EnterVehicle(RPCParameters *rpcParams) {} // TODO:
-void ExitVehicle(RPCParameters *rpcParams) {} // TODO:
-void UpdateScoreAndPing(RPCParameters *rpcParams) {} // TODO:
-void Admin(RPCParameters *rpcParams) {} // TODO:
-void KickPlayer(RPCParameters *rpcParams) {} // TODO:
-void BanIPAddress(RPCParameters *rpcParams) {} // TODO:
-void Ban(RPCParameters *rpcParams) {} // TODO:
-void Set(RPCParameters *rpcParams) {} // TODO:
-void SetA(RPCParameters *rpcParams) {} // TODO:
-void Quit(RPCParameters *rpcParams) {} // TODO:
-void QuitA(RPCParameters *rpcParams) {} // TODO:
-void PickedUp(RPCParameters *rpcParams) {} // TODO:
-void DoAnim(RPCParameters *rpcParams) {} // TODO:
-void Spec(RPCParameters *rpcParams) {} // TODO:
-void RequestAmmu(RPCParameters *rpcParams) {} // TODO:
-void RequestWep(RPCParameters *rpcParams) {} // TODO:
-void Commanda(RPCParameters *rpcParams) {} // TODO:
-void SetMin(RPCParameters *rpcParams) {} // TODO:
-void SetHr(RPCParameters *rpcParams) {} // TODO:
-void SetWeather(RPCParameters *rpcParams) {} // TODO:
-void SetTimeRate(RPCParameters *rpcParams) {} // TODO:
-void PlayerDied(RPCParameters *rpcParams) {} // TODO:
-void PlayerFell(RPCParameters *rpcParams) {} // TODO:
-void CrashDump(RPCParameters *rpcParams) {} // TODO:
-void SendSpikeStrip(RPCParameters *rpcParams) {} // TODO:
+//----------------------------------------------------
+
+void ClientJoin(RPCParameters *rpcParams) {} // TODO: ClientJoin
+void ClientJoinPatch(RPCParameters *rpcParams) {} // TODO: ClientJoinPatch
+void Chat(RPCParameters *rpcParams) {} // TODO: Chat
+void ME(RPCParameters *rpcParams) {} // TODO: ME
+void MsgChat(RPCParameters *rpcParams) {} // TODO: MsgChat
+void TeamChat(RPCParameters *rpcParams) {} // TODO: TeamChat
+void RequestClass(RPCParameters *rpcParams) {} // TODO: RequestClass
+void Spawn(RPCParameters *rpcParams) {} // TODO: Spawn
+void Death(RPCParameters *rpcParams) {} // TODO: Death
+void EnterVehicle(RPCParameters *rpcParams) {} // TODO: EnterVehicle
+void ExitVehicle(RPCParameters *rpcParams) {} // TODO: ExitVehicle
+void UpdateScoreAndPing(RPCParameters *rpcParams) {} // TODO: UpdateScoreAndPing
+void Admin(RPCParameters *rpcParams) {} // TODO: Admin
+void KickPlayer(RPCParameters *rpcParams) {} // TODO: KickPlayer
+void BanIPAddress(RPCParameters *rpcParams) {} // TODO: BanIPAddress
+void Ban(RPCParameters *rpcParams) {} // TODO: Ban
+void Set(RPCParameters *rpcParams) {} // TODO: Set
+void SetA(RPCParameters *rpcParams) {} // TODO: SetA
+void Quit(RPCParameters *rpcParams) {} // TODO: Quit
+void QuitA(RPCParameters *rpcParams) {} // TODO: QuitA
+void PickedUp(RPCParameters *rpcParams) {} // TODO: PickedUp
+void DoAnim(RPCParameters *rpcParams) {} // TODO: DoAnim
+void Spec(RPCParameters *rpcParams) {} // TODO: Spec
+void RequestAmmu(RPCParameters *rpcParams) {} // TODO: RequestAmmu
+void RequestWep(RPCParameters *rpcParams) {} // TODO: RequestWep
+void Commanda(RPCParameters *rpcParams) {} // TODO: Commanda
+void SetMin(RPCParameters *rpcParams) {} // TODO: SetMin
+void SetHr(RPCParameters *rpcParams) {} // TODO: SetHr
+void SetWeather(RPCParameters *rpcParams) {} // TODO: SetWeather
+void SetTimeRate(RPCParameters *rpcParams) {} // TODO: SetTimeRate
+void PlayerDied(RPCParameters *rpcParams) {} // TODO: PlayerDied
+void PlayerFell(RPCParameters *rpcParams) {} // TODO: PlayerFell
+void CrashDump(RPCParameters *rpcParams) {} // TODO: CrashDump
+void SendSpikeStrip(RPCParameters *rpcParams) {} // TODO: SendSpikeStrip
 
 //----------------------------------------------------
 

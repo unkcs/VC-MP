@@ -1,14 +1,25 @@
 
 #include "main.h"
 
+#ifdef LINUX
+
+char* strlwr(char* str)
+{
+	for (size_t i=0; i<strlen(str); i++)
+	{
+		if ((str[i] >= 'A') && (str[i] <= 'Z'))
+		{
+			str[i] -= 32;
+		}
+	}
+	return str;
+}
+
+#endif	// #ifdef LINUX
+
 CConsole::CConsole()
 {
 
-}
-
-CConsole::~CConsole()
-{
-	ConsoleVariables.clear();
 }
 
 ConsoleVariable_s* CConsole::FindVariable(char* pVarName)
@@ -105,6 +116,27 @@ void CConsole::SetStringVariable(char* pVarName, char* pString)
 	}
 }
 
+float CConsole::GetFloatVariable(char* pVarName)
+{
+	ConsoleVariable_s* ConVar = FindVariable(pVarName);
+	if (ConVar != NULL)
+	{
+		if (ConVar->VarType == CON_VARTYPE_FLOAT)
+			return *(float*)ConVar->VarPtr;
+	}
+	return 0.0f;
+}
+
+void CConsole::SetFloatVariable(char* pVarName, float fFloat)
+{
+	ConsoleVariable_s* ConVar = FindVariable(pVarName);
+	if (ConVar != NULL)
+	{
+		if (ConVar->VarType == CON_VARTYPE_FLOAT)
+			*(float*)ConVar->VarPtr = fFloat;
+	}
+}
+
 int CConsole::GetIntVariable(char* pVarName)
 {
 	ConsoleVariable_s* ConVar = FindVariable(pVarName);
@@ -126,6 +158,27 @@ void CConsole::SetIntVariable(char* pVarName, int iInt)
 	}
 }
 
+bool CConsole::GetBoolVariable(char* pVarName)
+{
+	ConsoleVariable_s* ConVar = FindVariable(pVarName);
+	if (ConVar != NULL)
+	{
+		if (ConVar->VarType == CON_VARTYPE_BOOL)
+			return *(bool*)ConVar->VarPtr;
+	}
+	return false;
+}
+
+void CConsole::SetBoolVariable(char* pVarName, bool bBool)
+{
+	ConsoleVariable_s* ConVar = FindVariable(pVarName);
+	if (ConVar != NULL)
+	{
+		if (ConVar->VarType == CON_VARTYPE_BOOL)
+			*(bool*)ConVar->VarPtr = bBool;
+	}
+}
+
 void CConsole::Execute(char* pExecLine)
 {
 	if (!pExecLine) return;
@@ -134,7 +187,6 @@ void CConsole::Execute(char* pExecLine)
 	char cpy[255];
 	strncpy(cpy, pExecLine, 255);
     char* cmd = strlwr(strtok(cpy, " "));
-
 
 	// TODO: CConsole::Execute
 }

@@ -9,4 +9,4 @@ void UnRegisterRPCs(RakServerInterface *);
 
 //----------------------------------------------------
 
-#endif
+#endif // VCMPSRV_NETRPC_H
